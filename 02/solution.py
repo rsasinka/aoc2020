@@ -21,7 +21,7 @@ def checker_part2(line: str):
     letter = line_sep[1][0]
     password = line_sep[2].strip()
 
-    if min_n > len(password) or max_n >= len(password):
+    if min_n > len(password) or max_n > len(password):
         return False
 
     pos1 = password[min_n] == letter
