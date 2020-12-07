@@ -16,16 +16,16 @@ def checker(line: str):
 
 def checker_part2(line: str):
     line_sep = line.split(" ")
-    min_n = int(line_sep[0].split("-")[0])
-    max_n = int(line_sep[0].split("-")[1])
+    min_n = int(line_sep[0].split("-")[0]) - 1
+    max_n = int(line_sep[0].split("-")[1]) - 1
     letter = line_sep[1][0]
     password = line_sep[2].strip()
 
     if min_n > len(password) or max_n >= len(password):
         return False
 
-    pos1 = password[min_n - 1] == letter
-    pos2 = password[max_n - 1] == letter
+    pos1 = password[min_n] == letter
+    pos2 = password[max_n] == letter
     # print(pos1, pos2, pos1 != pos2)
     return pos1 != pos2  # xor
 
@@ -49,3 +49,5 @@ def part2():
 
 if __name__ == '__main__':
     part2()
+    # print(checker_part2("1-3 c: abc"))
+    # print(checker_part2("1-4 a: abc"))
