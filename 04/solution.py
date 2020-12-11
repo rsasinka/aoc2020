@@ -18,7 +18,24 @@ def transform_entries_into_dic(lines: List[str]):
         for e in entries:
             entry = e.split(":")
             tmp[entry[0].strip()] = entry[1].strip()
+    res.append(tmp)
     return res
+
+
+def check_validity(entry_type, entry):
+    if entry_type == "byr":
+        return 1920 <= int(entry) <= 2002
+    if entry_type == "iyr":
+        return 2010 <= int(entry) <= 2020
+    if entry_type == "eyr":
+        return 2020 <= int(entry) <= 2030
+    if entry_type == "hgt":
+        if "cm" in entry:
+            return 150 <= entry.split("cm")[0] <= 193
+        if "in" in entry:
+            return 59 <= entry.split("in")[0] <= 76
+    if entry_type == "hcl":
+
 
 
 def check_passport(passport : Dict):
@@ -26,13 +43,10 @@ def check_passport(passport : Dict):
     demanded_entries = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"]
     for d in demanded_entries:
         if d not in passport.keys():
-            print(passport)
-            print("Length - ", str(len(passport.keys())))
-            print("Missing - ", d )
-            print("=============================")
             if d == "cid":
                 return True
             return False
+        elif check_validity(d, passport[d])
     return True
 
 
